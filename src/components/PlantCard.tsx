@@ -17,7 +17,7 @@ interface PlantCardProps {
 const PlantCard: React.FC<PlantCardProps> = ({ plant, onEdit, onDelete, onViewDetails }) => {
   const getStatusStyle = (status: string) => {
     switch (status) {
-      case PlantStatus.KEEP: return 'bg-ink text-background';
+      case PlantStatus.KEEP: return 'bg-flora text-background';
       case PlantStatus.REMOVE: return 'bg-error text-background';
       case PlantStatus.MANAGE: return 'bg-muted text-ink';
       default: return 'bg-muted text-ink';

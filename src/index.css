@@ -13,6 +13,10 @@
   --color-success: #000000;
   --color-error: #FF0000;
   
+  /* Flora Theme */
+  --color-flora: #3D5A45;
+  --color-flora-soft: #E8F0E9;
+  
   /* 8pt Grid System */
   --spacing-1: 0.25rem;  /* 4px */
   --spacing-2: 0.5rem;   /* 8px */

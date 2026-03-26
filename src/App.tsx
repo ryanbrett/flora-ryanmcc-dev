@@ -134,8 +134,8 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-24 px-8 border-b border-ink">
-        <div className="max-w-[1440px] mx-auto">
+      <section className="py-24 border-b border-ink">
+        <div className="max-w-[1440px] mx-auto px-8">
           <div className="max-w-3xl">
             <h2 className="text-[10vw] md:text-[80px] font-black leading-[0.9] tracking-tighter mb-8">
               Catalog your <br />
