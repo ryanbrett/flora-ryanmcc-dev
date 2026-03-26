@@ -15,9 +15,11 @@
         "petToxicity": { "type": "string" },
         "permacultureFunction": { "type": "string" },
         "managementNotes": { "type": "string" },
-        "createdAt": { "type": "number" }
+        "createdAt": { "type": "number" },
+        "authorUid": { "type": "string", "description": "UID of the user who added the plant" },
+        "authorName": { "type": "string", "description": "Display name of the user who added the plant" }
       },
-      "required": ["commonName", "scientificName", "imageUrl", "status", "createdAt"]
+      "required": ["commonName", "scientificName", "imageUrl", "status", "createdAt", "authorUid"]
     }
   },
   "firestore": {

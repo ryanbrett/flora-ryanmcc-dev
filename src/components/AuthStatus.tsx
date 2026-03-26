@@ -21,15 +21,34 @@ export default function AuthStatus() {
   }, []);
 
   const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   const handleLogin = async () => {
     setAuthLoading(true);
+    setAuthError(null);
     try {
       const provider = new GoogleAuthProvider();
+      // Add custom parameters to force account selection if needed
+      provider.setCustomParameters({ prompt: 'select_account' });
+      
       await signInWithPopup(auth, provider);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Auth error:", error);
-      // We'll use console error instead of alert for now
+      let message = "Login failed. Please try again.";
+      
+      if (error.code === 'auth/popup-closed-by-user') {
+        message = "The login popup was closed before completion.";
+      } else if (error.code === 'auth/unauthorized-domain') {
+        message = "This domain is not authorized for login. Please add it in Firebase Console.";
+      } else if (error.code === 'auth/popup-blocked') {
+        message = "The login popup was blocked by your browser.";
+      } else if (error.message) {
+        message = `Error: ${error.code || error.message}`;
+      }
+      
+      setAuthError(message);
+      // Auto-clear error after 10 seconds
+      setTimeout(() => setAuthError(null), 10000);
     } finally {
       setAuthLoading(false);
     }
@@ -40,37 +59,44 @@ export default function AuthStatus() {
   if (loading) return null;
 
   return (
-    <div className="flex items-center gap-4">
-      {user ? (
-        <div className="flex items-center gap-3 bg-green-50 px-4 py-2 rounded-full border border-green-100">
-          {user.photoURL ? (
-            <img src={user.photoURL} alt={user.displayName || ''} className="w-8 h-8 rounded-full border-2 border-white shadow-sm" referrerPolicy="no-referrer" />
-          ) : (
-            <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-              <UserIcon className="w-5 h-5 text-white" />
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex items-center gap-4">
+        {user ? (
+          <div className="flex items-center gap-3 bg-green-50 px-4 py-2 rounded-full border border-green-100">
+            {user.photoURL ? (
+              <img src={user.photoURL} alt={user.displayName || ''} className="w-8 h-8 rounded-full border-2 border-white shadow-sm" referrerPolicy="no-referrer" />
+            ) : (
+              <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                <UserIcon className="w-5 h-5 text-white" />
+              </div>
+            )}
+            <div className="hidden sm:block">
+              <p className="text-xs font-bold text-green-800 uppercase tracking-tighter">Contributor</p>
+              <p className="text-sm text-green-900 font-medium">{user.displayName || 'Logged In'}</p>
             </div>
-          )}
-          <div className="hidden sm:block">
-            <p className="text-xs font-bold text-green-800 uppercase tracking-tighter">Contributor</p>
-            <p className="text-sm text-green-900 font-medium">{user.displayName || 'Logged In'}</p>
+            <button 
+              onClick={handleLogout}
+              className="ml-2 p-2 hover:bg-green-100 rounded-full text-green-700 transition-colors"
+              title="Logout"
+            >
+              <LogOut className="w-5 h-5" />
+            </button>
           </div>
-          <button 
-            onClick={handleLogout}
-            className="ml-2 p-2 hover:bg-green-100 rounded-full text-green-700 transition-colors"
-            title="Logout"
+        ) : (
+          <button
+            onClick={handleLogin}
+            disabled={authLoading}
+            className="flex items-center gap-2 px-6 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-all font-medium shadow-lg shadow-gray-200 disabled:opacity-50"
           >
-            <LogOut className="w-5 h-5" />
+            <LogIn className="w-4 h-4" />
+            {authLoading ? 'Connecting...' : 'Login to Contribute'}
           </button>
+        )}
+      </div>
+      {authError && (
+        <div className="text-[10px] font-black uppercase tracking-widest text-error bg-error/10 px-3 py-1 border border-error animate-in fade-in slide-in-from-top-1">
+          {authError}
         </div>
-      ) : (
-        <button
-          onClick={handleLogin}
-          disabled={authLoading}
-          className="flex items-center gap-2 px-6 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-all font-medium shadow-lg shadow-gray-200 disabled:opacity-50"
-        >
-          <LogIn className="w-4 h-4" />
-          {authLoading ? 'Connecting...' : 'Login to Contribute'}
-        </button>
       )}
     </div>
   );
