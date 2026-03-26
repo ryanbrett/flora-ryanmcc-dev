@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Swiss Minimalist Palette */
+  --color-background: #FFFFFF;
+  --color-ink: #000000;
+  --color-muted: #F2F2F2;
+  --color-border: #E5E5E5;
+  --color-accent: #000000;
+  --color-success: #000000;
+  --color-error: #FF0000;
+  
+  /* 8pt Grid System */
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-16: 4rem;    /* 64px */
+  --spacing-24: 6rem;    /* 96px */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 0;
+    text-align: left;
+  }
+
+  p {
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Remove all ornamentation */
+  * {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  button {
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+}
+
+@layer components {
+  .swiss-button {
+    padding: var(--spacing-3) var(--spacing-6);
+    border: 1px solid var(--color-ink);
+    background: transparent;
+    color: var(--color-ink);
+    transition: background 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+  }
+
+  .swiss-button:hover {
+    background: var(--color-ink);
+    color: var(--color-background);
+  }
+
+  .swiss-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .swiss-button-error {
+    padding: var(--spacing-3) var(--spacing-6);
+    border: 1px solid var(--color-error);
+    background: transparent;
+    color: var(--color-error);
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+  }
+
+  .swiss-button-error:hover {
+    background: var(--color-error);
+    color: var(--color-background);
+  }
+
+  .swiss-input {
+    width: 100%;
+    padding: var(--spacing-3);
+    border: 1px solid var(--color-border);
+    background: var(--color-muted);
+    outline: none;
+    font-size: 0.875rem;
+  }
+
+  .swiss-input:focus {
+    border-color: var(--color-ink);
+    background: var(--color-background);
+  }
+
+  .label-micro {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-ink);
+    opacity: 0.5;
+    margin-bottom: var(--spacing-1);
+    display: block;
+  }
+}

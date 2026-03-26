@@ -1,0 +1,29 @@
+{
+  "entities": {
+    "Plant": {
+      "title": "Plant",
+      "description": "A record of a local plant species.",
+      "type": "object",
+      "properties": {
+        "commonName": { "type": "string", "description": "Common name of the plant" },
+        "scientificName": { "type": "string", "description": "Scientific name of the plant" },
+        "imageUrl": { "type": "string", "description": "URL to the plant's image" },
+        "status": { "type": "string", "enum": ["Keep in Garden", "Remove/Invasive", "Manage Closely"] },
+        "edibility": { "type": "string" },
+        "culinaryUses": { "type": "string" },
+        "medicinalBenefits": { "type": "string" },
+        "petToxicity": { "type": "string" },
+        "permacultureFunction": { "type": "string" },
+        "managementNotes": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["commonName", "scientificName", "imageUrl", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "plants": {
+      "schema": "Plant",
+      "description": "Collection of plant entries"
+    }
+  }
+}

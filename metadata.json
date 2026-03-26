@@ -1,0 +1,5 @@
+{
+  "name": "Local Flora Tracker",
+  "description": "A comprehensive tool for tracking native and invasive plant species in your local environment, featuring image uploads and detailed plant profiles.",
+  "requestFramePermissions": []
+}

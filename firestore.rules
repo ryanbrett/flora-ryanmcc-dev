@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    // Collection: plants
+    // Fields:
+    //   - commonName: string (required)
+    //   - scientificName: string (required)
+    //   - imageUrl: string (required)
+    //   - status: string (required, enum)
+    //   - edibility: string
+    //   - culinaryUses: string
+    //   - medicinalBenefits: string
+    //   - petToxicity: string
+    //   - permacultureFunction: string
+    //   - managementNotes: string
+    //   - createdAt: number (required)
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidPlant(data) {
+      return data.commonName is string && data.commonName.size() > 0 && data.commonName.size() < 200 &&
+             data.scientificName is string && data.scientificName.size() > 0 && data.scientificName.size() < 200 &&
+             data.imageUrl is string && data.imageUrl.size() > 0 &&
+             data.status in ['Keep in Garden', 'Remove/Invasive', 'Manage Closely'] &&
+             data.createdAt is number;
+    }
+
+    match /plants/{plantId} {
+      // Public Read Access
+      allow read: if true;
+      
+      // Authenticated Write Access
+      allow create: if isAuthenticated() && isValidPlant(request.resource.data);
+      allow update: if isAuthenticated() && isValidPlant(request.resource.data);
+      allow delete: if isAuthenticated();
+    }
+  }
+}
