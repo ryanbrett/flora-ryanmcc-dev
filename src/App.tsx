@@ -103,7 +103,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-2xl font-black tracking-tighter">FloraTracker</h1>
-              <p className="label-micro !mb-0">Local Ecosystem Database</p>
+              <p className="label-micro !mb-0">Baldwin County & SE Alabama Database</p>
             </div>
           </div>
 
@@ -139,11 +139,11 @@ export default function App() {
           <div className="max-w-3xl">
             <h2 className="text-[10vw] md:text-[80px] font-black leading-[0.9] tracking-tighter mb-8">
               Catalog your <br />
-              <span className="text-ink opacity-40">local flora.</span>
+              <span className="text-ink opacity-40">Flor'AL' flora.</span>
             </h2>
             <p className="text-lg font-medium max-w-xl leading-relaxed opacity-60">
-              A community-driven database for tracking native and invasive species. 
-              Objective mapping of local biodiversity.
+              A community-driven database for tracking native and invasive species in Baldwin County and South East Alabama. 
+              Objective mapping of our local biodiversity.
             </p>
           </div>
         </div>
