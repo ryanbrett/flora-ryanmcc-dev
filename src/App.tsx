@@ -96,36 +96,36 @@ export default function App() {
 
       {/* Header */}
       <header className="border-b border-ink">
-        <div className="max-w-[1440px] mx-auto px-8 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-ink flex items-center justify-center">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 min-h-[6rem] py-4 sm:py-0 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4 w-full sm:w-auto">
+            <div className="w-12 h-12 bg-ink flex items-center justify-center shrink-0">
               <Leaf className="w-6 h-6 text-background" />
             </div>
             <div>
               <h1 className="text-2xl font-black tracking-tighter">FloraTracker</h1>
-              <p className="label-micro !mb-0">Baldwin County & SE Alabama Database</p>
+              <p className="label-micro !mb-0">Local Ecosystem Database</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-8 w-full sm:w-auto">
             <AuthStatus />
             {user && (
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-4">
                 <button
                   onClick={handleSeed}
                   disabled={seeding}
-                  className="swiss-button"
+                  className="swiss-button px-3 sm:px-4"
                   title="Import Doc Data"
                 >
                   <Database className="w-4 h-4" />
-                  <span>{seeding ? 'Importing' : 'Seed Data'}</span>
+                  <span className="hidden sm:inline">{seeding ? 'Importing' : 'Seed'}</span>
                 </button>
                 <button
                   onClick={() => setShowForm(true)}
-                  className="swiss-button bg-ink text-background"
+                  className="swiss-button bg-ink text-background px-3 sm:px-4"
                 >
                   <Plus className="w-4 h-4" />
-                  <span>Add Plant</span>
+                  <span className="hidden sm:inline">Add Plant</span>
                 </button>
               </div>
             )}
@@ -139,11 +139,11 @@ export default function App() {
           <div className="max-w-3xl">
             <h2 className="text-[10vw] md:text-[80px] font-black leading-[0.9] tracking-tighter mb-8">
               Catalog your <br />
-              <span className="text-ink opacity-40">Flor'AL' flora.</span>
+              <span className="text-ink opacity-40">local flora.</span>
             </h2>
             <p className="text-lg font-medium max-w-xl leading-relaxed opacity-60">
-              A community-driven database for tracking native and invasive species in Baldwin County and South East Alabama. 
-              Objective mapping of our local biodiversity.
+              A community-driven database for tracking native and invasive species. 
+              Objective mapping of local biodiversity.
             </p>
           </div>
         </div>
